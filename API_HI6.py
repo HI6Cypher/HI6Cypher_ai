@@ -1,8 +1,23 @@
 import requests
 class DownloadData :
-    """"""
-    def __init__(self, api_url, mode) :
-        self.__url = str(api_url)
+    """API DownloadData
+    ~~~
+    DownloadData module receives data from URLs
+    ### This module takes two arguments:\n
+    url -> takes URL\n
+    mode -> takes one of API data modes(json, html, text)
+    ### example code:
+    >>> from API_HI6 import DownloadData
+    >>> result = DownloadData("https://api.github.com", "text")
+    >>> data = result.GetData()
+    >>> status_code = result.Status_Code
+    >>> print(status_code)
+    >>> print(data)
+    >>> 200
+        "any data from github"
+    """
+    def __init__(self, url, mode) :
+        self.__url = str(url)
         self.__mode = str(mode)
         self.__status_code = None
         self.__data = None
@@ -39,7 +54,16 @@ class DownloadData :
             raise ValueError(f"({self.__mode}) is wrong value!, change your mode")
 
     def GetData(self) :
-        """"""
+        """ DownloadData : GetData
+        ~~~
+        For get data from anywhere first you should\n
+        call this method!\n
+        ### what exactly this method returns?
+        data (json, html, text) -> when everything going to be well\n
+        503 -> it means you have no connection to the Internet\n
+        400 -> it means the URL not found (probably due to Invalid URL)\n
+        408 -> it means your request timedout becausethe URL have 15s to response\n
+        """
         self.__Get_Data()
         if self.__data :
             return self.__data
