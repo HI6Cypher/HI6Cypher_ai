@@ -60,7 +60,7 @@ class DownloadData :
         data (json, html, text) -> when everything going to be well\n
         503 -> it means you have no connection to the Internet\n
         400 -> it means the URL not found (probably due to Invalid URL)\n
-        408 -> it means your request timedout becausethe URL have 15s to response\n
+        408 -> it means your request timed out becausethe URL have 15s to response\n
         """
         self.__Get_Data()
         if self.__data :

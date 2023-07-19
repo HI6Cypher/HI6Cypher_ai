@@ -1,0 +1,13 @@
+translate: https://api.codebazan.ir/translate/?type=json&from=en&to=fa&text=hello
+http://api.codebazan.ir/time-date/?json=all
+https://api.codebazan.ir/bours/
+http://api.codebazan.ir/password/?length=20
+http://api.codebazan.ir/arz/?type=tala
+http://api.codebazan.ir/arz/?type=arz
+https://api.country.is/89.32.108.106
+https://get.geojs.io/v1/ip/geo.json
+https://api.sunrisesunset.io/json?lat=38.907192&lng=-77.036873&timezone=UTC&date=today
+https://wttr.in/Tehran?format=3
+http://www.omdbapi.com/?t=moviename&apikey=4cb67dde
+https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd
+my ip: https://api.ipify.org?format=json
