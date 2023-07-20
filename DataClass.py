@@ -189,3 +189,4 @@ class DataClass :
     api_url_5 = "http://api.codebazan.ir/password/?length=20"
     api_url_6 = "http://www.omdbapi.com/?t=moviename&apikey=4cb67dde"
     api_url_7 = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd"
+    api_url_8 = "https://api.openweathermap.org/data/2.5/weather?lat=0&lon=0&appid=d7ac3233b2d88a4c8f01032c02eae2db"

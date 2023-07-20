@@ -5,4 +5,4 @@ get my ip: https://get.geojs.io/v1/ip/geo.json (done)
 https://api.sunrisesunset.io/json?lat=38.907192&lng=-77.036873&timezone=UTC (done)
 http://api.codebazan.ir/password/?length=20
 http://www.omdbapi.com/?t=moviename&apikey=4cb67dde
-https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd
+https://api.coingecko.com/api/v3/coins/markets?vs_currency=usdhttps://api.openweathermap.org/data/2.5/weather?lat=0&lon=0&appid=d7ac3233b2d88a4c8f01032c02eae2db
