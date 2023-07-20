@@ -1,7 +1,7 @@
 from API_HI6 import DownloadData
-def DataProcessing_translate(fromLan, toLan, text) :
-    url = f"https://api.codebazan.ir/translate/?type=json&from={fromLan}&to={toLan}&text={text}"
-    download = DownloadData(url, "json")
+def DataProcessing_passwordgenerator(length) :
+    url = f"http://api.codebazan.ir/password/?length={length}"
+    download = DownloadData(url, "text")
     data = download.GetData()
     if data == 503 :
         return "No connection to Internet!"
@@ -10,4 +10,4 @@ def DataProcessing_translate(fromLan, toLan, text) :
     elif data == 408 :
         return "Request timed out!"
     else :
-        return data["result"]
+        return data

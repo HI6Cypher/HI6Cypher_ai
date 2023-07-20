@@ -38,6 +38,9 @@ class DownloadData :
                 self.__data = data.text
             else :
                 raise ValueError(f"({self.__mode}) is wrong value")
+        except requests.exceptions.ConnectionError :
+            self.__data = 503
+            self.__status_code = 503
         except requests.exceptions.MissingSchema :
             self.__data = 400
             self.__status_code = 400

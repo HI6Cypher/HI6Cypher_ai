@@ -180,5 +180,12 @@ class DataClass :
     { "code": "yo", "name": "Yoruba" },
     { "code": "za", "name": "Zhuang" },
     { "code": "zh", "name": "Chinese" },
-    { "code": "zu", "name": "Zulu" }
-    ]
+    { "code": "zu", "name": "Zulu" }]
+    api_url_0 = "https://api.codebazan.ir/translate/?type=json&from=en&to=fa&text=hello world"
+    api_url_1 = "http://api.codebazan.ir/time-date/?json=all"
+    api_url_2 = "http://ip-api.com/json/127.0.0.1"
+    api_url_3 = "https://get.geojs.io/v1/ip/geo.json"
+    api_url_4 = "https://api.sunrisesunset.io/json?lat=0&lng=0&timezone=UTC"
+    api_url_5 = "http://api.codebazan.ir/password/?length=20"
+    api_url_6 = "http://www.omdbapi.com/?t=moviename&apikey=4cb67dde"
+    api_url_7 = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd"
