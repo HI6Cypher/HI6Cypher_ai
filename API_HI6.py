@@ -24,7 +24,7 @@ class DownloadData :
     >>> "whatever texts"
     """
     def __init__(self, url, mode, data = None, json = None, params = None, \
-        headers = None, files = None, auth = None, timeout = 15) :
+                headers = None, files = None, auth = None, timeout = 15) :
         self.__url = str(url)
         self.__mode = str(mode)
         self.__payload = data
@@ -43,9 +43,10 @@ class DownloadData :
 
     def __Get_Data(self) :
         try :
-            data = requests.get(url = self.__url, params = self.__params, data = self.__payload, \
-            json = self.__json, headers = self.__headers, files = self.__files, auth = self.__auth, \
-            timeout = self.__timeout)
+            data = requests.get(url = self.__url, params = self.__params, \
+                                data = self.__payload, json = self.__json, \
+                                headers = self.__headers, files = self.__files, \
+                                auth = self.__auth, timeout = self.__timeout)
             self.__status_code = data.status_code
             if self.__mode == "json" :
                 self.__data = data.json()
@@ -117,7 +118,7 @@ class UploadData :
     >>> {"name":"arash","job":"programmer","id":"615","createdAt":"2023-07-21T10:38:00.252Z"}
     """
     def __init__(self, url, data, json = None, params = None, \
-        headers = None, files = None, auth = None, timeout = 15) :
+                headers = None, files = None, auth = None, timeout = 15) :
         self.__url = url
         self.__payload = data
         self.__json = json
@@ -135,9 +136,10 @@ class UploadData :
 
     def __Send_Data(self) :
         try :
-            data = requests.post(url = self.__url, data = self.__payload, json = self.__json, \
-            params = self.__params, headers = self.__headers, files = self.__files, auth = self.__auth, \
-            timeout = self.__timeout)
+            data = requests.post(url = self.__url, data = self.__payload, \
+                                json = self.__json, params = self.__params, \
+                                headers = self.__headers, files = self.__files, \
+                                auth = self.__auth, timeout = self.__timeout)
             self.__status_code = data.status_code
         except requests.exceptions.ConnectionError :
             self.__text = 503

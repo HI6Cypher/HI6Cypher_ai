@@ -7,11 +7,11 @@ def DataProcessing_currency(currency) :
         for i in data["data"] :
             if i["name"] == currency.title() :
                 string_1 = "Symbol: %s\nName: %s\nRank: %s\n" \
-                % (i["symbol"], i["name"], i["rank"])
+                        % (i["symbol"], i["name"], i["rank"])
                 string_2 = "Price USD: %s\nPrice BTC: %s\n" \
-                % (i["price_usd"], i["price_btc"])
+                        % (i["price_usd"], i["price_btc"])
                 string_3 = "Percent Change(24h): %s\nPercent Change(1h): %s\nPercent Change(7d): %s" \
-                % (i["percent_change_24h"], i["percent_change_1h"], i["percent_change_7d"])
+                        % (i["percent_change_24h"], i["percent_change_1h"], i["percent_change_7d"])
                 return string_1 + string_2 + string_3
                 break
             else :

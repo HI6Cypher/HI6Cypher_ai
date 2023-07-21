@@ -40,7 +40,7 @@ def DataProcessing_weather() :
         humidity = data_2["main"]["humidity"]
         wind = data_2["wind"]["speed"]
         string_1 = "City: %s\nWeather: %s\nTemperature in Kelvin: %s\nTemperature in Fahrenheit: %s\nTemperature in Celcius: %s" \
-        % (city, weather, temp_kelvin, temp_fahrenheit, temp_celcius)
+                % (city, weather, temp_kelvin, temp_fahrenheit, temp_celcius)
         string_2 = "\nPressure: %s\nHumidity: %s\nWind: %s Km/h\nSunrise: %s\nSunset: %s\nDawn: %s\nDusk: %s\nDay length: %s" \
-        % (pressure, humidity, wind, sunrise, sunset, dawn, dusk, daylength)
+                % (pressure, humidity, wind, sunrise, sunset, dawn, dusk, daylength)
         return string_1 + string_2

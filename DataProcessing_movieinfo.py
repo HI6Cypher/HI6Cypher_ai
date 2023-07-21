@@ -13,9 +13,9 @@ def DataProcessing_movieinfo(movie) :
                 key_list.append(data[i])
             else :
                 string_1 = "Title: %s\nType: %s\nRated: %s\nReleased: %s\nRuntime: %s\nGenre: %s\nDirector: %s\n" \
-                % (key_list[0], key_list[1], key_list[2], key_list[3], key_list[4], key_list[5], key_list[6])
+                        % (key_list[0], key_list[1], key_list[2], key_list[3], key_list[4], key_list[5], key_list[6])
                 string_2 = "Writer: %s\nActors: %s\nCountry: %s\nLanguage: %s\nAwards: %s\nIMDb Rating: %s\nIMDb Votes: %s\nIMDb ID: %s\nPlot: %s\n" \
-                % (key_list[7], key_list[8], key_list[9], key_list[10], key_list[11], key_list[12], key_list[13], key_list[14], key_list[15])
+                        % (key_list[7], key_list[8], key_list[9], key_list[10], key_list[11], key_list[12], key_list[13], key_list[14], key_list[15])
                 return string_1 + string_2
         else :
             return data["Error"]

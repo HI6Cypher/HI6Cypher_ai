@@ -7,8 +7,8 @@ def DataProcessing_ipinfo(ip) :
         
         if data["status"] == "success" :
             string = "Country: %s, %s, %s\nISP: %s\nLatitude: %s\nLongitude: %s" \
-            % (data["country"], data["regionName"], data["city"], data["isp"], data["lat"],\
-            data["lon"])
+                    % (data["country"], data["regionName"], data["city"], data["isp"], data["lat"],\
+                    data["lon"])
             return string
         else :
             return data["message"]
