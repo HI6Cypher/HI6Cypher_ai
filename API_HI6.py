@@ -6,6 +6,12 @@ class DownloadData :
     ### This module takes two arguments:\n
     url -> takes URL\n
     mode -> takes one of API data modes(json, html, text)\n
+    data -> payload\n
+    json -> json payload\n
+    params -> passing parameters in URLs\n
+    headers ->  view the server's response headers\n
+    files -> post multipart-encoded file\n
+    auth -> use authorization headers\n
     timeout -> stop waiting for a response (default = 15s)
     ### example code:
     >>> from API_HI6 import DownloadData
@@ -17,9 +23,16 @@ class DownloadData :
     >>> 200
     >>> "whatever texts"
     """
-    def __init__(self, url, mode, timeout = 15) :
+    def __init__(self, url, mode, data = None, json = None, params = None, \
+        headers = None, files = None, auth = None, timeout = 15) :
         self.__url = str(url)
         self.__mode = str(mode)
+        self.__payload = data
+        self.__json = json
+        self.__params = params
+        self.__headers = headers
+        self.__files = files
+        self.__auth = auth
         self.__timeout = timeout
         self.__status_code = None
         self.__data = None
@@ -30,7 +43,9 @@ class DownloadData :
 
     def __Get_Data(self) :
         try :
-            data = requests.get(self.__url, timeout = self.__timeout)
+            data = requests.get(url = self.__url, params = self.__params, data = self.__payload, \
+            json = self.__json, headers = self.__headers, files = self.__files, auth = self.__auth, \
+            timeout = self.__timeout)
             self.__status_code = data.status_code
             if self.__mode == "json" :
                 self.__data = data.json()
@@ -101,7 +116,8 @@ class UploadData :
     >>> 201
     >>> {"name":"arash","job":"programmer","id":"615","createdAt":"2023-07-21T10:38:00.252Z"}
     """
-    def __init__(self, url, data, json = False, params = False, headers = False, files = False, auth = False) :
+    def __init__(self, url, data, json = None, params = None, \
+        headers = None, files = None, auth = None, timeout = 15) :
         self.__url = url
         self.__payload = data
         self.__json = json
@@ -109,6 +125,7 @@ class UploadData :
         self.__headers = headers
         self.__files = files
         self.__auth = auth
+        self.__timeout = timeout
         self.__status_code = None
         self.__text = None
     
@@ -119,7 +136,8 @@ class UploadData :
     def __Send_Data(self) :
         try :
             data = requests.post(url = self.__url, data = self.__payload, json = self.__json, \
-            params = self.__params, headers = self.__headers, files = self.__files, auth = self.__auth, timeout= 15)
+            params = self.__params, headers = self.__headers, files = self.__files, auth = self.__auth, \
+            timeout = self.__timeout)
             self.__status_code = data.status_code
         except requests.exceptions.ConnectionError :
             self.__text = 503
