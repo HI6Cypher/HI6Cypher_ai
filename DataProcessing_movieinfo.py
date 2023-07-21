@@ -27,5 +27,3 @@ def DataProcessing_movieinfo(movie) :
         return "Request timed out!"
     else :
         return Decision()
-ff = DataProcessing_movieinfo("wargames")
-print(ff)
