@@ -24,6 +24,8 @@ def DataProcessing_currency(currency) :
         return "Invalid URL!"
     elif data == 408 :
         return "Request timed out!"
+    elif data == None :
+        return None
     else :
         return Decision()
 
@@ -50,6 +52,8 @@ def DataProcessing_datatime(keyword) :
         return "Invalid URL!"
     elif data == 408 :
         return "Request timed out!"
+    elif data == None :
+        return None
     else :
         return Decision()
 
@@ -72,6 +76,8 @@ def DataProcessing_ipinfo(ip) :
         return "Invalid URL!"
     elif data == 408 :
         return "Request timed out!"
+    elif data == None :
+        return None
     else :
         return Decision()
 
@@ -101,6 +107,8 @@ def DataProcessing_movieinfo(movie) :
         return "Invalid URL!"
     elif data == 408 :
         return "Request timed out!"
+    elif data == None :
+        return None
     else :
         return Decision()
 
@@ -114,6 +122,8 @@ def DataProcessing_myipinfo() :
         return "Invalid URL!"
     elif data == 408 :
         return "Request timed out!"
+    elif data == None :
+        return None
     else :
         string = "Your IP: %s\nCountry: %s, %s\nTimeZone: %s\nLatitude: %s\nLongitude: %s" \
                 % (data["ip"], data["country"], data["region"], data["timezone"], data["latitude"],\
@@ -130,6 +140,8 @@ def DataProcessing_passwordgenerator(length) :
         return "Invalid URL!"
     elif data == 408 :
         return "Request timed out!"
+    elif data == None :
+        return None
     else :
         return data
 
@@ -143,6 +155,8 @@ def DataProcessing_translate(fromLan, toLan, text) :
         return "Invalid URL!"
     elif data == 408 :
         return "Request timed out!"
+    elif data == None :
+        return None
     else :
         return data["result"]
 
@@ -156,6 +170,8 @@ def DataProcessing_weather(lat = None, lon = None, timezone = None) :
         return "Invalid URL!"
     elif data_1 == 408 :
         return "Request timed out!"
+    elif data_1 == None :
+        return None
     elif lat and lon and timezone :
         pass
     else :
@@ -174,6 +190,8 @@ def DataProcessing_weather(lat = None, lon = None, timezone = None) :
         return "Invalid URL!"
     elif data_2 == 408 and data_3 == 408 :
         return "Request timed out!"
+    elif data_2 == None and data_3 == None :
+        return None
     else :
         city = data_2["name"]
         weather = data_2["weather"][0]["description"]

@@ -70,6 +70,8 @@ class DownloadData :
             self.__status_code = 400
         except requests.exceptions.JSONDecodeError :
             raise ValueError(f"({self.__mode}) is wrong value!, change your mode")
+        except :
+            self.__data = None
 
 
     def GetData(self) :
@@ -153,6 +155,8 @@ class UploadData :
         except requests.exceptions.InvalidURL :
             self.__text = 400
             self.__status_code = 400
+        except :
+            self.__text = None
         else :
             self.__text = data.text
         
