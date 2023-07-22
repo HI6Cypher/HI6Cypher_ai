@@ -1,5 +1,5 @@
 from API_HI6 import DownloadData
-def DataProcessing_weather() :
+def DataProcessing_weather(lat = None, lon = None, timezone = None) :
     url_1 = "https://get.geojs.io/v1/ip/geo.json"
     download_1 = DownloadData(url_1, "json")
     data_1 = download_1.GetData()
@@ -9,12 +9,14 @@ def DataProcessing_weather() :
         return "Invalid URL!"
     elif data_1 == 408 :
         return "Request timed out!"
+    elif lat and lon and timezone :
+        pass
     else :
         lat = data_1["latitude"]
         lon = data_1["longitude"]
         timezone = data_1["timezone"]
     url_2 = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=d7ac3233b2d88a4c8f01032c02eae2db"
-    url_3 = f"https://api.sunrisesunset.io/json?lat={lat}&lng={lon}&timezone={timezone}"
+    url_3 = f"https://api.sunrisesunset.io/json?lat={lat}&lng={lon}&timezone={timezone.title()}"
     download_2 = DownloadData(url_2, "json")
     data_2 = download_2.GetData()
     download_3 = DownloadData(url_3, "json")
