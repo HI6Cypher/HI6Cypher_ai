@@ -6,4 +6,4 @@ https://api.sunrisesunset.io/json?lat=38.907192&lng=-77.036873&timezone=UTC (don
 https://api.openweathermap.org/data/2.5/weather?lat=0&lon=0&appid=d7ac3233b2d88a4c8f01032c02eae2db (done)
 http://api.codebazan.ir/password/?length=20 (done)
 http://www.omdbapi.com/?t=moviename&apikey=4cb67dde (done)
-https://api.coinlore.net/api/tickers/
+https://api.coinlore.net/api/tickers/ (done)
