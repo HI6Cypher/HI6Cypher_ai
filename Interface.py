@@ -1,5 +1,20 @@
 from DataClass import DataClass
 from DataProcessing import *
+def Interface_news(keywords) :
+    pass #TODO
+
+def Interface_currency(currency) :
+    pass #TODO
+
+def Interface_datatime(keywords) :
+    pass #TODO
+
+def Interface_ipinfo() :
+    pass #TODO
+
+def Interface_movieinfo(movie) :
+    pass #TODO
+
 def Interface_myipinfo() :
     return DataProcessing_myipinfo()
 
@@ -38,4 +53,7 @@ def Interface_weather(lat = None, lon = None, timezone = "UTC") :
             return DataProcessing_weather(lat, lon, timezone = "UTC")
     else :
         return DataProcessing_weather()
+
+def Interface_uselessfacts() :
+    pass #TODO
 

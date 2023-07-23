@@ -1,7 +1,32 @@
 from API_HI6 import DownloadData
+def DataProcessing_news(keywords) :
+    payload = {"keywords" : keywords,
+                "language" : "en",
+                "apiKey" : "asbBfb6qBcdJwSjEvfO35Tdb9SVJVvq5kSud4gWjPw8caKHV"}
+    url = "https://api.currentsapi.services/v1/search"
+    download = DownloadData(url = url, params = payload, mode = "json", timeout = 30)
+    data = download.GetData()
+    if data == 503 :
+        return "No connection to Internet!"
+    elif data == 400 :
+        return "Invalid URL!"
+    elif data == 408 :
+        return "Request timed out!"
+    elif data == None :
+        return None
+    else :
+        string = ""
+        for i in data["news"] :
+            text = "Title: %s\n\nDescription: %s\n\nAuthor: %s\n\nCategory: %s\n\nPublished: %s\n\nURL: %s\n\nImage: %s\n\n\n\n" \
+                    % (i["title"], i["description"], i["author"], i["category"][0],  \
+                     i["published"], i["url"], i["image"])
+            string += text
+        else :
+            return string
+
 def DataProcessing_currency(currency) :
     url = "https://api.coinlore.net/api/tickers/"
-    download = DownloadData(url, "json")
+    download = DownloadData(url = url, mode = "json")
     data = download.GetData()
     def Decision() :
         for i in data["data"] :
@@ -29,23 +54,23 @@ def DataProcessing_currency(currency) :
     else :
         return Decision()
 
-def DataProcessing_datatime(keyword) :
+def DataProcessing_datatime(keywords) :
     url = "http://api.codebazan.ir/time-date/?json=all"
-    download = DownloadData(url, "json")
+    download = DownloadData(url = url, mode = "json")
     data = download.GetData()
     def Decision() :
-        if keyword == "day" :
+        if keywords == "day" :
             return data["result"]["nameday"]
-        elif keyword == "month" :
+        elif keywords == "month" :
             return data["result"]["month"]
-        elif keyword == "year" :
+        elif keywords == "year" :
             return data["result"]["year"]
-        elif keyword == "time" :
+        elif keywords == "time" :
             return data["result"]["timeen"]
-        elif keyword == "date" :
+        elif keywords == "date" :
             return data["result"]["dateen"]
         else :
-            return "Use keywords [day, month, year, time, date]"
+            return "Use keywordss [day, month, year, time, date]"
     if data == 503 :
         return "No connection to Internet!"
     elif data == 400 :
@@ -59,7 +84,7 @@ def DataProcessing_datatime(keyword) :
 
 def DataProcessing_ipinfo(ip) :
     url = f"http://ip-api.com/json/{ip}"
-    download = DownloadData(url, "json")
+    download = DownloadData(url = url, mode = "json")
     data = download.GetData()
     def Decision() :
         
@@ -82,10 +107,10 @@ def DataProcessing_ipinfo(ip) :
         return Decision()
 
 def DataProcessing_movieinfo(movie) :
-    url = f"http://www.omdbapi.com/?t={movie}&apikey=4cb67dde"
-    download = DownloadData(url, "json")
+    payload = {"t" : movie, "apikey" : "4cb67dde"}
+    url = f"http://www.omdbapi.com/"
+    download = DownloadData(url = url, params = payload, mode = "json")
     data = download.GetData()
-    
     def Decision() :
         if data["Response"] == "True" :
             key_list = []
@@ -114,7 +139,7 @@ def DataProcessing_movieinfo(movie) :
 
 def DataProcessing_myipinfo() :
     url = "https://get.geojs.io/v1/ip/geo.json"
-    download = DownloadData(url, "json")
+    download = DownloadData(url= url, mode = "json")
     data = download.GetData()
     if data == 503 :
         return "No connection to Internet!"
@@ -131,8 +156,9 @@ def DataProcessing_myipinfo() :
         return string
 
 def DataProcessing_passwordgenerator(length) :
-    url = f"http://api.codebazan.ir/password/?length={length}"
-    download = DownloadData(url, "text")
+    payload = {"length" : length}
+    url = f"http://api.codebazan.ir/password/"
+    download = DownloadData(url = url, params = payload, mode = "text")
     data = download.GetData()
     if data == 503 :
         return "No connection to Internet!"
@@ -146,8 +172,9 @@ def DataProcessing_passwordgenerator(length) :
         return data
 
 def DataProcessing_translate(fromLan, toLan, text) :
-    url = f"https://api.codebazan.ir/translate/?type=json&from={fromLan}&to={toLan}&text={text}"
-    download = DownloadData(url, "json")
+    payload = {"type" : "json", "from" : fromLan, "to" : toLan, "text" : text}
+    url = f"https://api.codebazan.ir/translate/"
+    download = DownloadData(url = url, params = payload, mode = "json")
     data = download.GetData()
     if data == 503 :
         return "No connection to Internet!"
@@ -162,7 +189,7 @@ def DataProcessing_translate(fromLan, toLan, text) :
 
 def DataProcessing_weather(lat = None, lon = None, timezone = None) :
     url_1 = "https://get.geojs.io/v1/ip/geo.json"
-    download_1 = DownloadData(url_1, "json")
+    download_1 = DownloadData(url = url_1, mode = "json")
     data_1 = download_1.GetData()
     if data_1 == 503 :
         return "No connection to Internet!"
@@ -178,11 +205,13 @@ def DataProcessing_weather(lat = None, lon = None, timezone = None) :
         lat = data_1["latitude"]
         lon = data_1["longitude"]
         timezone = data_1["timezone"]
-    url_2 = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=d7ac3233b2d88a4c8f01032c02eae2db"
-    url_3 = f"https://api.sunrisesunset.io/json?lat={lat}&lng={lon}&timezone={timezone.title()}"
-    download_2 = DownloadData(url_2, "json")
+    payload_1 = {"lat" : lat, "lon" : lon, "appid" : "d7ac3233b2d88a4c8f01032c02eae2db"}
+    url_2 = f"https://api.openweathermap.org/data/2.5/weather"
+    payload_2 = {"lat" : lat, "lng" : lon, "timezone" : timezone}
+    url_3 = f"https://api.sunrisesunset.io/json"
+    download_2 = DownloadData(url = url_2, params = payload_1, mode = "json")
     data_2 = download_2.GetData()
-    download_3 = DownloadData(url_3, "json")
+    download_3 = DownloadData(url = url_3, params = payload_2, mode = "json")
     data_3 = download_3.GetData()
     if data_2 == 503 and data_3 == 503 :
         return "No connection to Internet!"
@@ -211,3 +240,6 @@ def DataProcessing_weather(lat = None, lon = None, timezone = None) :
         string_2 = "\nPressure: %s\nHumidity: %s\nWind: %s Km/h\nSunrise: %s\nSunset: %s\nDawn: %s\nDusk: %s\nDay length: %s" \
                 % (pressure, humidity, wind, sunrise, sunset, dawn, dusk, daylength)
         return string_1 + string_2
+
+def DataProcessing_uselessfacts() :
+    pass #TODO

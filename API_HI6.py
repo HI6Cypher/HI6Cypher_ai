@@ -12,6 +12,7 @@ class DownloadData :
     headers ->  view the server's response headers\n
     files -> post multipart-encoded file\n
     auth -> use authorization headers\n
+    proxies -> use proxies for connecting\n
     timeout -> stop waiting for a response (default = 15s)
     ### example code:
     >>> from API_HI6 import DownloadData
@@ -24,7 +25,7 @@ class DownloadData :
     >>> "whatever texts"
     """
     def __init__(self, url, mode, data = None, json = None, params = None, \
-                headers = None, files = None, auth = None, timeout = 15) :
+                headers = None, files = None, auth = None, proxies = None, timeout = 15) :
         self.__url = str(url)
         self.__mode = str(mode)
         self.__payload = data
@@ -33,6 +34,7 @@ class DownloadData :
         self.__headers = headers
         self.__files = files
         self.__auth = auth
+        self.__proxies = proxies
         self.__timeout = timeout
         self.__status_code = None
         self.__data = None
@@ -46,7 +48,8 @@ class DownloadData :
             data = requests.get(url = self.__url, params = self.__params, \
                                 data = self.__payload, json = self.__json, \
                                 headers = self.__headers, files = self.__files, \
-                                auth = self.__auth, timeout = self.__timeout)
+                                auth = self.__auth, proxies = self.__proxies, \
+                                timeout = self.__timeout)
             self.__status_code = data.status_code
             if self.__mode == "json" :
                 self.__data = data.json()
@@ -104,6 +107,7 @@ class UploadData :
     headers ->  view the server's response headers\n
     files -> post multipart-encoded file\n
     auth -> use authorization headers\n
+    proxies -> use proxies for connecting\n
     timeout -> stop waiting for a response (default = 15s)
     ### example code:
     >>> from API_HI6 import UploadData
@@ -120,7 +124,7 @@ class UploadData :
     >>> {"name":"arash","job":"programmer","id":"615","createdAt":"2023-07-21T10:38:00.252Z"}
     """
     def __init__(self, url, data, json = None, params = None, \
-                headers = None, files = None, auth = None, timeout = 15) :
+                headers = None, files = None, auth = None, proxies = None, timeout = 15) :
         self.__url = url
         self.__payload = data
         self.__json = json
@@ -128,6 +132,7 @@ class UploadData :
         self.__headers = headers
         self.__files = files
         self.__auth = auth
+        self.__proxies = proxies
         self.__timeout = timeout
         self.__status_code = None
         self.__text = None
@@ -141,7 +146,8 @@ class UploadData :
             data = requests.post(url = self.__url, data = self.__payload, \
                                 json = self.__json, params = self.__params, \
                                 headers = self.__headers, files = self.__files, \
-                                auth = self.__auth, timeout = self.__timeout)
+                                auth = self.__auth, proxies = self.__proxies, \
+                                timeout = self.__timeout)
             self.__status_code = data.status_code
         except requests.exceptions.ConnectionError :
             self.__text = 503
