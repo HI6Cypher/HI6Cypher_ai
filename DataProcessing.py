@@ -3,11 +3,14 @@ def DataProcessing_news(keywords) :
     payload = {"keywords" : keywords,
                 "language" : "en",
                 "apiKey" : "asbBfb6qBcdJwSjEvfO35Tdb9SVJVvq5kSud4gWjPw8caKHV"}
+    proxies = {"http" : "https://95.56.254.139:3128"}
     url = "https://api.currentsapi.services/v1/search"
-    download = DownloadData(url = url, params = payload, mode = "json", timeout = 30)
-    data = download.GetData()
+    download = DownloadData(url = url, params = payload, proxies = proxies,  mode = "json", timeout = 30)
+    data = download.get_data()
     if data == 503 :
         return "No connection to Internet!"
+    elif data == 500 :
+        return "internal server error!"
     elif data == 400 :
         return "Invalid URL!"
     elif data == 408 :
@@ -17,9 +20,8 @@ def DataProcessing_news(keywords) :
     else :
         string = ""
         for i in data["news"] :
-            text = "Title: %s\n\nDescription: %s\n\nAuthor: %s\n\nCategory: %s\n\nPublished: %s\n\nURL: %s\n\nImage: %s\n\n\n\n" \
-                    % (i["title"], i["description"], i["author"], i["category"][0],  \
-                     i["published"], i["url"], i["image"])
+            text = "Title: %s\n\nDescription: %s\n\nAuthor: %s\n\nPublished: %s\n\nURL: %s\n\nImage: %s\n\n\n\n" \
+                    % (i["title"], i["description"], i["author"], i["published"], i["url"], i["image"])
             string += text
         else :
             return string
@@ -27,7 +29,7 @@ def DataProcessing_news(keywords) :
 def DataProcessing_currency(currency) :
     url = "https://api.coinlore.net/api/tickers/"
     download = DownloadData(url = url, mode = "json")
-    data = download.GetData()
+    data = download.get_data()
     def Decision() :
         for i in data["data"] :
             if i["name"] == currency.title() :
@@ -45,6 +47,8 @@ def DataProcessing_currency(currency) :
             return "Unknown Currency"
     if data == 503 :
         return "No connection to Internet!"
+    elif data == 500 :
+        return "internal server error!"
     elif data == 400 :
         return "Invalid URL!"
     elif data == 408 :
@@ -57,7 +61,7 @@ def DataProcessing_currency(currency) :
 def DataProcessing_datatime(keywords) :
     url = "http://api.codebazan.ir/time-date/?json=all"
     download = DownloadData(url = url, mode = "json")
-    data = download.GetData()
+    data = download.get_data()
     def Decision() :
         if keywords == "day" :
             return data["result"]["nameday"]
@@ -73,6 +77,8 @@ def DataProcessing_datatime(keywords) :
             return "Use keywordss [day, month, year, time, date]"
     if data == 503 :
         return "No connection to Internet!"
+    elif data == 500 :
+        return "internal server error!"
     elif data == 400 :
         return "Invalid URL!"
     elif data == 408 :
@@ -85,7 +91,7 @@ def DataProcessing_datatime(keywords) :
 def DataProcessing_ipinfo(ip) :
     url = f"http://ip-api.com/json/{ip}"
     download = DownloadData(url = url, mode = "json")
-    data = download.GetData()
+    data = download.get_data()
     def Decision() :
         
         if data["status"] == "success" :
@@ -97,6 +103,8 @@ def DataProcessing_ipinfo(ip) :
             return data["message"]
     if data == 503 :
         return "No connection to Internet!"
+    elif data == 500 :
+        return "internal server error!"
     elif data == 400 :
         return "Invalid URL!"
     elif data == 408 :
@@ -110,7 +118,7 @@ def DataProcessing_movieinfo(movie) :
     payload = {"t" : movie, "apikey" : "4cb67dde"}
     url = f"http://www.omdbapi.com/"
     download = DownloadData(url = url, params = payload, mode = "json")
-    data = download.GetData()
+    data = download.get_data()
     def Decision() :
         if data["Response"] == "True" :
             key_list = []
@@ -128,6 +136,8 @@ def DataProcessing_movieinfo(movie) :
             return data["Error"]
     if data == 503 :
         return "No connection to Internet!"
+    elif data == 500 :
+        return "internal server error!"
     elif data == 400 :
         return "Invalid URL!"
     elif data == 408 :
@@ -140,9 +150,11 @@ def DataProcessing_movieinfo(movie) :
 def DataProcessing_myipinfo() :
     url = "https://get.geojs.io/v1/ip/geo.json"
     download = DownloadData(url= url, mode = "json")
-    data = download.GetData()
+    data = download.get_data()
     if data == 503 :
         return "No connection to Internet!"
+    elif data == 500 :
+        return "internal server error!"
     elif data == 400 :
         return "Invalid URL!"
     elif data == 408 :
@@ -159,9 +171,11 @@ def DataProcessing_passwordgenerator(length) :
     payload = {"length" : length}
     url = f"http://api.codebazan.ir/password/"
     download = DownloadData(url = url, params = payload, mode = "text")
-    data = download.GetData()
+    data = download.get_data()
     if data == 503 :
         return "No connection to Internet!"
+    elif data == 500 :
+        return "internal server error!"
     elif data == 400 :
         return "Invalid URL!"
     elif data == 408 :
@@ -175,9 +189,11 @@ def DataProcessing_translate(fromLan, toLan, text) :
     payload = {"type" : "json", "from" : fromLan, "to" : toLan, "text" : text}
     url = f"https://api.codebazan.ir/translate/"
     download = DownloadData(url = url, params = payload, mode = "json")
-    data = download.GetData()
+    data = download.get_data()
     if data == 503 :
         return "No connection to Internet!"
+    elif data == 500 :
+        return "internal server error!"
     elif data == 400 :
         return "Invalid URL!"
     elif data == 408 :
@@ -190,9 +206,11 @@ def DataProcessing_translate(fromLan, toLan, text) :
 def DataProcessing_weather(lat = None, lon = None, timezone = None) :
     url_1 = "https://get.geojs.io/v1/ip/geo.json"
     download_1 = DownloadData(url = url_1, mode = "json")
-    data_1 = download_1.GetData()
+    data_1 = download_1.get_data()
     if data_1 == 503 :
         return "No connection to Internet!"
+    elif data_1 == 500 :
+        return "internal server error!"
     elif data_1 == 400 :
         return "Invalid URL!"
     elif data_1 == 408 :
@@ -210,11 +228,13 @@ def DataProcessing_weather(lat = None, lon = None, timezone = None) :
     payload_2 = {"lat" : lat, "lng" : lon, "timezone" : timezone}
     url_3 = f"https://api.sunrisesunset.io/json"
     download_2 = DownloadData(url = url_2, params = payload_1, mode = "json")
-    data_2 = download_2.GetData()
+    data_2 = download_2.get_data()
     download_3 = DownloadData(url = url_3, params = payload_2, mode = "json")
-    data_3 = download_3.GetData()
+    data_3 = download_3.get_data()
     if data_2 == 503 and data_3 == 503 :
         return "No connection to Internet!"
+    elif data_2 == 500 and data_3 == 500 :
+        return "internal server error!"
     elif data_2 == 400 and data_3 == 400 :
         return "Invalid URL!"
     elif data_2 == 408 and data_3 == 408 :

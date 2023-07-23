@@ -17,7 +17,7 @@ class DownloadData :
     ### example code:
     >>> from API_HI6 import DownloadData
     >>> get_data = DownloadData("https://api.github.com", "text")
-    >>> data = get_data.GetData()
+    >>> data = get_data.get_data()
     >>> status_code = result.Status_Code
     >>> print(status_code)
     >>> print(data)
@@ -40,10 +40,10 @@ class DownloadData :
         self.__data = None
 
     @property
-    def Status_Code(self) :
+    def status_code(self) :
         return self.__status_code
 
-    def __Get_Data(self) :
+    def __get_data(self) :
         try :
             data = requests.get(url = self.__url, params = self.__params, \
                                 data = self.__payload, json = self.__json, \
@@ -62,23 +62,28 @@ class DownloadData :
         except requests.exceptions.ConnectionError :
             self.__data = 503
             self.__status_code = 503
+        except requests.exceptions.Timeout :
+            self.__data = 408
+            self.__status_code = 408
         except requests.exceptions.MissingSchema :
             self.__data = 400
             self.__status_code = 400
-        except requests.exceptions.ReadTimeout :
-            self.__data = 408
-            self.__status_code = 408
+        except requests.exceptions.ChunkedEncodingError:
+            self.__data = 400
+            self.__status_code = 400
         except requests.exceptions.InvalidURL :
             self.__data = 400
             self.__status_code = 400
+        except requests.exceptions.ContentDecodingError :
+            self.__data = 500
+            self.__status_code = 500
         except requests.exceptions.JSONDecodeError :
             raise ValueError(f"({self.__mode}) is wrong value!, change your mode")
         except :
-            self.__data = None
-
-
-    def GetData(self) :
-        """ DownloadData : GetData
+            self.__data = 404
+            self.__status_code = 404
+    def get_data(self) :
+        """ DownloadData : get_data
         ~~~
         For get data from anywhere first you should\n
         call this method!\n
@@ -88,7 +93,7 @@ class DownloadData :
         400 -> it means the URL not found (probably due to Invalid URL)\n
         408 -> it means your request timed out becausethe URL have 15s to response\n
         """
-        self.__Get_Data()
+        self.__get_data()
         if self.__data :
             return self.__data
         else :
@@ -116,7 +121,7 @@ class UploadData :
         "job": "programmer"
         } 
     >>> send_data = UploadData("https://reqres.in/api/users", data = payload)
-    >>> data = send_data.SendData()
+    >>> data = send_data.send_data()
     >>> status_code = result.Status_Code
     >>> print(status_code)
     >>> print(data)
@@ -138,10 +143,10 @@ class UploadData :
         self.__text = None
     
     @property
-    def Status_Code(self) :
+    def status_code(self) :
         return self.__status_code
 
-    def __Send_Data(self) :
+    def __send_data(self) :
         try :
             data = requests.post(url = self.__url, data = self.__payload, \
                                 json = self.__json, params = self.__params, \
@@ -152,22 +157,29 @@ class UploadData :
         except requests.exceptions.ConnectionError :
             self.__text = 503
             self.__status_code = 503
+        except requests.exceptions.Timeout :
+            self.__text = 408
+            self.__status_code = 408
         except requests.exceptions.MissingSchema :
             self.__text = 400
             self.__status_code = 400
-        except requests.exceptions.ReadTimeout :
-            self.__text = 408
-            self.__status_code = 408
+        except requests.exceptions.ChunkedEncodingError:
+            self.__text = 400
+            self.__status_code = 400
         except requests.exceptions.InvalidURL :
             self.__text = 400
             self.__status_code = 400
+        except requests.exceptions.ContentDecodingError :
+            self.__text = 500
+            self.__status_code = 500
         except :
-            self.__text = None
+            self.__text = 404
+            self.__status_code = 404
         else :
             self.__text = data.text
         
-    def SendData(self) :
-        """ UploadData : SendData
+    def send_data(self) :
+        """ UploadData : send_data
         ~~~
         For send data to anywhere first you should\n
         call this method!\n
@@ -177,7 +189,7 @@ class UploadData :
         400 -> it means the URL not found (probably due to Invalid URL)\n
         408 -> it means your request timed out becausethe URL have 15s to response\n
         """
-        self.__Send_Data()
+        self.__send_data()
         if self.__text :
             return self.__text
         else :
