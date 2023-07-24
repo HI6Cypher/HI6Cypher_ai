@@ -1,30 +1,37 @@
 from API_HI6 import DownloadData
+from DataClass import DataClass
 def DataProcessing_news(keywords) :
-    payload = {"keywords" : keywords,
-                "language" : "en",
-                "apiKey" : "asbBfb6qBcdJwSjEvfO35Tdb9SVJVvq5kSud4gWjPw8caKHV"}
-    proxies = {"http" : "https://95.56.254.139:3128"}
-    url = "https://api.currentsapi.services/v1/search"
-    download = DownloadData(url = url, params = payload, proxies = proxies,  mode = "json", timeout = 30)
-    data = download.get_data()
-    if data == 503 :
-        return "No connection to Internet!"
-    elif data == 500 :
-        return "internal server error!"
-    elif data == 400 :
-        return "Invalid URL!"
-    elif data == 408 :
-        return "Request timed out!"
-    elif data == None :
-        return None
-    else :
-        string = ""
-        for i in data["news"] :
-            text = "Title: %s\n\nDescription: %s\n\nAuthor: %s\n\nPublished: %s\n\nURL: %s\n\nImage: %s\n\n\n\n" \
-                    % (i["title"], i["description"], i["author"], i["published"], i["url"], i["image"])
-            string += text
+    proxy_count = 1
+    for proxy in DataClass.proxies :
+        payload = {"keywords" : keywords,
+                    "language" : "en",
+                    "apiKey" : "asbBfb6qBcdJwSjEvfO35Tdb9SVJVvq5kSud4gWjPw8caKHV"}
+        url = "https://api.currentsapi.services/v1/search"
+        download = DownloadData(url = url, params = payload, proxies = proxy,  mode = "json", timeout = 5)
+        data = download.get_data()
+        if data == 503 :
+            proxy_count += 1
+            continue
+        elif data == 500 :
+            return "internal server error!"
+        elif data == 400 :
+            return "Invalid URL!"
+        elif data == 408 :
+            proxy_count += 1
+            continue
+        elif data == 404 :
+            proxy_count += 1
+            continue
         else :
-            return string
+            string = ""
+            for i in data["news"] :
+                text = "Title: %s\n\nDescription: %s\n\nAuthor: %s\n\nPublished: %s\n\nURL: %s\n\nImage: %s\n\n\n\n" \
+                        % (i["title"], i["description"], i["author"], i["published"], i["url"], i["image"])
+                string += text
+            else :
+                return string + f"\n\n[Used {proxy_count} Proxy]"
+    else :
+        return f"Connection failed!\n[Used {proxy_count} Proxy]"
 
 def DataProcessing_currency(currency) :
     url = "https://api.coinlore.net/api/tickers/"
@@ -40,7 +47,6 @@ def DataProcessing_currency(currency) :
                 string_3 = "Percent Change(24h): %s\nPercent Change(1h): %s\nPercent Change(7d): %s" \
                         % (i["percent_change_24h"], i["percent_change_1h"], i["percent_change_7d"])
                 return string_1 + string_2 + string_3
-                break
             else :
                 continue
         else :
@@ -53,8 +59,8 @@ def DataProcessing_currency(currency) :
         return "Invalid URL!"
     elif data == 408 :
         return "Request timed out!"
-    elif data == None :
-        return None
+    elif data == 404 :
+        return "Something went wronge!"
     else :
         return Decision()
 
@@ -74,7 +80,7 @@ def DataProcessing_datatime(keywords) :
         elif keywords == "date" :
             return data["result"]["dateen"]
         else :
-            return "Use keywordss [day, month, year, time, date]"
+            return "Use keywords [day, month, year, time, date]"
     if data == 503 :
         return "No connection to Internet!"
     elif data == 500 :
@@ -83,8 +89,8 @@ def DataProcessing_datatime(keywords) :
         return "Invalid URL!"
     elif data == 408 :
         return "Request timed out!"
-    elif data == None :
-        return None
+    elif data == 404 :
+        return "Something went wronge!"
     else :
         return Decision()
 
@@ -109,8 +115,8 @@ def DataProcessing_ipinfo(ip) :
         return "Invalid URL!"
     elif data == 408 :
         return "Request timed out!"
-    elif data == None :
-        return None
+    elif data == 404 :
+        return "Something went wronge!"
     else :
         return Decision()
 
@@ -142,8 +148,8 @@ def DataProcessing_movieinfo(movie) :
         return "Invalid URL!"
     elif data == 408 :
         return "Request timed out!"
-    elif data == None :
-        return None
+    elif data == 404 :
+        return "Something went wronge!"
     else :
         return Decision()
 
@@ -159,8 +165,8 @@ def DataProcessing_myipinfo() :
         return "Invalid URL!"
     elif data == 408 :
         return "Request timed out!"
-    elif data == None :
-        return None
+    elif data == 404 :
+        return "Something went wronge!"
     else :
         string = "Your IP: %s\nCountry: %s, %s\nTimeZone: %s\nLatitude: %s\nLongitude: %s" \
                 % (data["ip"], data["country"], data["region"], data["timezone"], data["latitude"],\
@@ -180,8 +186,8 @@ def DataProcessing_passwordgenerator(length) :
         return "Invalid URL!"
     elif data == 408 :
         return "Request timed out!"
-    elif data == None :
-        return None
+    elif data == 404 :
+        return "Something went wronge!"
     else :
         return data
 
@@ -198,8 +204,8 @@ def DataProcessing_translate(fromLan, toLan, text) :
         return "Invalid URL!"
     elif data == 408 :
         return "Request timed out!"
-    elif data == None :
-        return None
+    elif data == 404 :
+        return "Something went wronge!"
     else :
         return data["result"]
 
@@ -215,8 +221,8 @@ def DataProcessing_weather(lat = None, lon = None, timezone = None) :
         return "Invalid URL!"
     elif data_1 == 408 :
         return "Request timed out!"
-    elif data_1 == None :
-        return None
+    elif data_1 == 404 :
+        return "Something went wronge!"
     elif lat and lon and timezone :
         pass
     else :
@@ -239,8 +245,8 @@ def DataProcessing_weather(lat = None, lon = None, timezone = None) :
         return "Invalid URL!"
     elif data_2 == 408 and data_3 == 408 :
         return "Request timed out!"
-    elif data_2 == None and data_3 == None :
-        return None
+    elif data_2 == 404 and data_3 == 404 :
+        return "Something went wronge!"
     else :
         city = data_2["name"]
         weather = data_2["weather"][0]["description"]
@@ -262,4 +268,18 @@ def DataProcessing_weather(lat = None, lon = None, timezone = None) :
         return string_1 + string_2
 
 def DataProcessing_uselessfacts() :
-    pass #TODO
+    url = "https://uselessfacts.jsph.pl/api/v2/facts/random"
+    download = DownloadData(url = url, mode = "json")
+    data = download.get_data()
+    if data == 503 :
+        return "No connection to Internet!"
+    elif data == 500 :
+        return "internal server error!"
+    elif data == 400 :
+        return "Invalid URL!"
+    elif data == 408 :
+        return "Request timed out!"
+    elif data == 404 :
+        return "Something went wronge!"
+    else :
+        return data["text"]
