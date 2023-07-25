@@ -10,6 +10,9 @@ class DataClass :
     api_url_8 = "https://api.openweathermap.org/data/2.5/weather?lat=&lon=&appid=d7ac3233b2d88a4c8f01032c02eae2db"
     api_url_9 = "https://api.currentsapi.services/v1/search?keywords=&language=&apiKey=asbBfb6qBcdJwSjEvfO35Tdb9SVJVvq5kSud4gWjPw8caKHV"
     api_url_10 = "https://uselessfacts.jsph.pl/api/v2/facts/random"
+    api_url_11 = "http://api.forismatic.com/api/1.0/?method=getQuote&format=json&key=1&lang=en"
+    api_url_12 = "https://byabbe.se/on-this-day/month/day/events.json"
+    api_url_13 = "https://api.dictionaryapi.dev/api/v2/entries/en/word"
 
     proxies = [{"http" : "https://95.56.254.139:3128"},
     {"http" : "https://103.51.205.42:8181"}, {"http" : "https://200.106.167.130:999"},
@@ -21,11 +24,10 @@ class DataClass :
     {"http" : "https://65.20.171.253:8080"}, {"http" : "https://62.89.9.10:8080"},
     {"http" : "https://84.38.160.80:8080"}, {"http" : "https://142.190.148.86:8080"},
     {"http" : "https://204.199.174.8:999"}, {"http" : "https://41.85.116.0:8080"},
-    {"http" : "https://181.176.174.25:999"}, {"http" : "https://79.127.56.147:8080"},
-    {"http" : "https://124.106.12.138:8080"}, {"http" : "https://185.252.29.234:8090"},
-    {"http" : "https://201.251.40.254:999"}, {"http" : "https://5.202.53.65:8080"},
-    {"http" : "https://118.99.102.99:8080"}, {"http" : "https://103.105.76.85:8080"},
-    {"http" : "https://144.49.105.44:8080"}, {"http" : "https://181.49.100.190:8080"}]
+    {"http" : "https://181.176.174.25:999"}, {"http" : "https://124.106.12.138:8080"},
+    {"http" : "https://201.251.40.254:999"}, {"http" : "https://118.99.102.99:8080"},
+    {"http" : "https://103.105.76.85:8080"}, {"http" : "https://144.49.105.44:8080"},
+    {"http" : "https://181.49.100.190:8080"}]
 
 
     languages = [

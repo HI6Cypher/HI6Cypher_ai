@@ -134,3 +134,15 @@ def Interface_uselessfacts() :
             return f"A useless fact:\n{DataProcessing_uselessfacts()}"
     except :
         return "Error!"
+
+def Interface_quotes() :
+    pass #TODO
+
+def Interface_catfacts() :
+    pass #TODO
+
+def Interface_events(month, day) :
+    pass #TODO
+
+def Interface_dictionary(word) :
+    pass #TODO

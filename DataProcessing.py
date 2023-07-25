@@ -1,4 +1,4 @@
-from API_HI6 import DownloadData
+from HI6 import GetPayload
 from DataClass import DataClass
 def DataProcessing_news(keywords) :
     proxy_count = 1
@@ -7,7 +7,7 @@ def DataProcessing_news(keywords) :
                     "language" : "en",
                     "apiKey" : "asbBfb6qBcdJwSjEvfO35Tdb9SVJVvq5kSud4gWjPw8caKHV"}
         url = "https://api.currentsapi.services/v1/search"
-        download = DownloadData(url = url, params = payload, proxies = proxy,  mode = "json", timeout = 5)
+        download = GetPayload(url = url, params = payload, proxies = proxy,  mode = "json", timeout = 5)
         data = download.get_data()
         if data == 503 :
             proxy_count += 1
@@ -23,6 +23,7 @@ def DataProcessing_news(keywords) :
             proxy_count += 1
             continue
         else :
+            proxy_count += 1
             string = ""
             for i in data["news"] :
                 text = "Title: %s\n\nDescription: %s\n\nAuthor: %s\n\nPublished: %s\n\nURL: %s\n\nImage: %s\n\n\n\n" \
@@ -35,8 +36,9 @@ def DataProcessing_news(keywords) :
 
 def DataProcessing_currency(currency) :
     url = "https://api.coinlore.net/api/tickers/"
-    download = DownloadData(url = url, mode = "json")
+    download = GetPayload(url = url, mode = "json")
     data = download.get_data()
+
     def Decision() :
         for i in data["data"] :
             if i["name"] == currency.title() :
@@ -66,8 +68,9 @@ def DataProcessing_currency(currency) :
 
 def DataProcessing_datatime(keywords) :
     url = "http://api.codebazan.ir/time-date/?json=all"
-    download = DownloadData(url = url, mode = "json")
+    download = GetPayload(url = url, mode = "json")
     data = download.get_data()
+
     def Decision() :
         if keywords == "day" :
             return data["result"]["nameday"]
@@ -96,8 +99,9 @@ def DataProcessing_datatime(keywords) :
 
 def DataProcessing_ipinfo(ip) :
     url = f"http://ip-api.com/json/{ip}"
-    download = DownloadData(url = url, mode = "json")
+    download = GetPayload(url = url, mode = "json")
     data = download.get_data()
+
     def Decision() :
         
         if data["status"] == "success" :
@@ -123,8 +127,9 @@ def DataProcessing_ipinfo(ip) :
 def DataProcessing_movieinfo(movie) :
     payload = {"t" : movie, "apikey" : "4cb67dde"}
     url = f"http://www.omdbapi.com/"
-    download = DownloadData(url = url, params = payload, mode = "json")
+    download = GetPayload(url = url, params = payload, mode = "json")
     data = download.get_data()
+
     def Decision() :
         if data["Response"] == "True" :
             key_list = []
@@ -155,7 +160,7 @@ def DataProcessing_movieinfo(movie) :
 
 def DataProcessing_myipinfo() :
     url = "https://get.geojs.io/v1/ip/geo.json"
-    download = DownloadData(url= url, mode = "json")
+    download = GetPayload(url= url, mode = "json")
     data = download.get_data()
     if data == 503 :
         return "No connection to Internet!"
@@ -176,7 +181,7 @@ def DataProcessing_myipinfo() :
 def DataProcessing_passwordgenerator(length) :
     payload = {"length" : length}
     url = f"http://api.codebazan.ir/password/"
-    download = DownloadData(url = url, params = payload, mode = "text")
+    download = GetPayload(url = url, params = payload, mode = "text")
     data = download.get_data()
     if data == 503 :
         return "No connection to Internet!"
@@ -194,7 +199,7 @@ def DataProcessing_passwordgenerator(length) :
 def DataProcessing_translate(fromLan, toLan, text) :
     payload = {"type" : "json", "from" : fromLan, "to" : toLan, "text" : text}
     url = f"https://api.codebazan.ir/translate/"
-    download = DownloadData(url = url, params = payload, mode = "json")
+    download = GetPayload(url = url, params = payload, mode = "json")
     data = download.get_data()
     if data == 503 :
         return "No connection to Internet!"
@@ -211,7 +216,7 @@ def DataProcessing_translate(fromLan, toLan, text) :
 
 def DataProcessing_weather(lat = None, lon = None, timezone = None) :
     url_1 = "https://get.geojs.io/v1/ip/geo.json"
-    download_1 = DownloadData(url = url_1, mode = "json")
+    download_1 = GetPayload(url = url_1, mode = "json")
     data_1 = download_1.get_data()
     if data_1 == 503 :
         return "No connection to Internet!"
@@ -233,9 +238,9 @@ def DataProcessing_weather(lat = None, lon = None, timezone = None) :
     url_2 = f"https://api.openweathermap.org/data/2.5/weather"
     payload_2 = {"lat" : lat, "lng" : lon, "timezone" : timezone}
     url_3 = f"https://api.sunrisesunset.io/json"
-    download_2 = DownloadData(url = url_2, params = payload_1, mode = "json")
+    download_2 = GetPayload(url = url_2, params = payload_1, mode = "json")
     data_2 = download_2.get_data()
-    download_3 = DownloadData(url = url_3, params = payload_2, mode = "json")
+    download_3 = GetPayload(url = url_3, params = payload_2, mode = "json")
     data_3 = download_3.get_data()
     if data_2 == 503 and data_3 == 503 :
         return "No connection to Internet!"
@@ -269,7 +274,7 @@ def DataProcessing_weather(lat = None, lon = None, timezone = None) :
 
 def DataProcessing_uselessfacts() :
     url = "https://uselessfacts.jsph.pl/api/v2/facts/random"
-    download = DownloadData(url = url, mode = "json")
+    download = GetPayload(url = url, mode = "json")
     data = download.get_data()
     if data == 503 :
         return "No connection to Internet!"
@@ -283,3 +288,94 @@ def DataProcessing_uselessfacts() :
         return "Something went wronge!"
     else :
         return data["text"]
+
+def DataProcessing_quotes() :
+    payload = {"method" : "getQuote",
+                "format" : "json",
+                "key" : 1, 
+                "lang" : "en"}
+    url = "http://api.forismatic.com/api/1.0/"
+    download = GetPayload(url = url, params = payload, mode = "json")
+    data = download.get_data()
+    if data == 503 :
+        return "No connection to Internet!"
+    elif data == 500 :
+        return "internal server error!"
+    elif data == 400 :
+        return "Invalid URL!"
+    elif data == 408 :
+        return "Request timed out!"
+    elif data == 404 :
+        return "Something went wronge!"
+    else :
+        string = "Quote: %s\nAuthor: %s" % (data["quoteText"], data["quoteAuthor"])
+        return string
+
+def DataProcessing_catfacts() :
+    proxy_count = 0
+    for proxy in DataClass.proxies :
+        url = "https://meowfacts.herokuapp.com"
+        download = GetPayload(url = url, mode = "json", proxies = proxy, timeout = 1)
+        data = download.get_data()
+        if data == 503 :
+            proxy_count += 1
+            continue
+        elif data == 500 :
+            return "internal server error!"
+        elif data == 400 :
+            return "Invalid URL!"
+        elif data == 408 :
+            proxy_count += 1
+            continue
+        elif data == 404 :
+            proxy_count += 1
+            continue
+        else :
+            proxy_count += 1
+            return data["data"][0]
+    else :
+        return f"Connection failed!\n[Used {proxy_count} Proxy]"
+    
+def DataProcessing_events(month, day) :
+    month = int(month)
+    day = int(day)
+    day_month30 = [4, 6, 9, 11]
+
+    def Decision(m, d) :
+        if m in range(1, 13) and d in range(1, 32) :
+            url = f"https://byabbe.se/on-this-day/{m}/{d}/events.json"
+            download = GetPayload(url = url, mode = "json")
+            data = download.get_data()
+            if data == 503 :
+                return "No connection to Internet!"
+            elif data == 500 :
+                return "internal server error!"
+            elif data == 400 :
+                return "Invalid URL!"
+            elif data == 408 :
+                return "Request timed out!"
+            elif data == 404 :
+                return "Something went wronge!"
+            else :
+                string = ""
+                for i in data["events"] :
+                    string += "Year: %s\nDescription: %s\n\n" % (i["year"], i["description"])
+                else :
+                    return "Date: %s\n\n%s" % (data["date"], string)
+        else :
+            return "Unknown date format!"
+
+    if month in day_month30 and day == 31 :
+        day -= 1
+        return "April, June, September, and November have 30 days\n\n%s" % (Decision(month, day))
+    elif month == 2 and day == 31 :
+        day -= 2
+        return "February has 28 days (29 in a leap year)\n\n%s" % (Decision(month, day))
+    elif month == 2 and day == 30 :
+        day -= 1
+        return "February has 28 days (29 in a leap year)\n\n%s" % (Decision(month, day))
+    else :
+        return Decision(month, day)
+
+def DataProcessing_dictionary(word) :
+    pass #TODO
