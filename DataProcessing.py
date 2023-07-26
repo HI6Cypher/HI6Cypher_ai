@@ -378,4 +378,39 @@ def DataProcessing_events(month, day) :
         return Decision(month, day)
 
 def DataProcessing_dictionary(word) :
-    pass #TODO
+    url = f"https://api.dictionaryapi.dev/api/v2/entries/en/{word}"
+    download = GetPayload(url = url, mode = "json")
+    data = download.get_data()
+    if data == 503 :
+        return "No connection to Internet!"
+    elif data == 500 :
+        return "internal server error!"
+    elif data == 400 :
+        return "Invalid URL!"
+    elif data == 408 :
+        return "Request timed out!"
+    elif data == 404 :
+        return "Something went wronge!"
+    else :
+        try :
+            if "phonetic" in data[0].keys() :
+                string = "Word: %s\nPhonetic: %s\n\n" % (data[0]["word"], data[0]["phonetic"])
+            else :
+                string = "Word: %s\n\n" % (data[0]["word"])
+            for i in data[0]["meanings"] :
+                string += "Definitions(%s):\n\n" % (i["partOfSpeech"])
+                for j in i["definitions"] :
+                    string += "-%s\n" % (j["definition"])
+                else :
+                    string += "\n\n"
+            else :
+                if i["synonyms"] :
+                    string += "\n\nSynonyms: "
+                    for k in i["synonyms"] :
+                        string += "(%s) " % (k)
+                    else :
+                        return string + "\n\n%s"% (data[0]["sourceUrls"][0])
+                else :
+                    return string + "\n\n%s"% (data[0]["sourceUrls"][0])
+        except :
+            return data["title"]

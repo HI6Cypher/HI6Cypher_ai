@@ -136,13 +136,25 @@ def Interface_uselessfacts() :
         return "Error!"
 
 def Interface_quotes() :
-    pass #TODO
+    try :
+        return DataProcessing_quotes()
+    except :
+        return "Error!"
 
 def Interface_catfacts() :
-    pass #TODO
+    try :
+        return DataProcessing_catfacts()
+    except :
+        return "Error!"
 
 def Interface_events(month, day) :
-    pass #TODO
+    try :
+        return DataProcessing_events(month, day)
+    except :
+        return "Error!"
 
 def Interface_dictionary(word) :
-    pass #TODO
+    try :
+        return DataProcessing_dictionary(word)
+    except :
+        return "Error!"

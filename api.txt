@@ -10,4 +10,4 @@ https://api.coinlore.net/api/tickers/ (done)
 https://uselessfacts.jsph.pl/api/v2/facts/random (done)
 http://api.forismatic.com/api/1.0/?method=getQuote&format=json&key=1&lang=en (done)
 https://byabbe.se/on-this-day/month/day/events.json (done)
-https://api.dictionaryapi.dev/api/v2/entries/en/{word}
+https://api.dictionaryapi.dev/api/v2/entries/en/{word} (done)
