@@ -1,4 +1,27 @@
 class DataClass :
+    
+    news_keywords = ["NEWS", "News", "news",\
+                    "nEws", "neWs", "newS",\
+                    "NEWSLETTER", "NewsLetter",\
+                    "nEwsLetter", "neWsLetter",\
+                    "newSLetter", "NEWSletter",\
+                    "Newsletter", "newsletter",\
+                    "nEwslettr", "neWsletter",\
+                    "newSletter"]
+
+    cryptocurrency_keywords = ["CRYPTO", "Crypto", "crypto",\
+                            "CURRENCY", "Currency", "currency",\
+                            "CRYPTOCURRENCY", "CryptoCurrency",\
+                            "Cryptocurrency", "cryptoCurrency",\
+                            "cryptocurrency"]
+
+    translate_keywords = ["TRANSLATE", "Translate",\
+                        "translate", "TRANSLATION",\
+                        "Translation", "translation",\
+                        "MEAN", "Mean", "mean",\
+                        "MEANING", "Meaning",\
+                        "meaning"]
+
     api_url_0 = "https://api.codebazan.ir/translate/?type=&from=&to=&text="
     api_url_1 = "http://api.codebazan.ir/time-date/?json=all"
     api_url_2 = "http://ip-api.com/json/127.0.0.1"

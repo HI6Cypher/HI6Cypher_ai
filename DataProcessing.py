@@ -34,14 +34,14 @@ def DataProcessing_news(keywords) :
     else :
         return f"Connection failed!\n[Used {proxy_count} Proxy]"
 
-def DataProcessing_currency(currency) :
+def DataProcessing_cryptocurrency(cryptocurrency) :
     url = "https://api.coinlore.net/api/tickers/"
     download = GetPayload(url = url, mode = "json")
     data = download.get_data()
 
     def Decision() :
         for i in data["data"] :
-            if i["name"] == currency.title() :
+            if i["name"] == cryptocurrency.title() :
                 string_1 = "Symbol: %s\nName: %s\nRank: %s\n" \
                         % (i["symbol"], i["name"], i["rank"])
                 string_2 = "Price USD: %s\nPrice BTC: %s\n" \

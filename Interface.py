@@ -18,9 +18,9 @@ def Interface_news(keywords) :
     except :
         return "Error!"
 
-def Interface_currency(currency) :
+def Interface_cryptocurrency(cryptocurrency) :
     try :
-        return DataProcessing_currency(currency)
+        return DataProcessing_cryptocurrency(cryptocurrency)
     except :
         return "Error!"
 
