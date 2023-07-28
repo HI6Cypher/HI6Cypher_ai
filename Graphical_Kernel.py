@@ -156,10 +156,10 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.pushButton_snap.clicked.connect(self.pushButton_snap.click) # type: ignore
-        self.pushButton_save.clicked.connect(self.pushButton_save.click) # type: ignore
-        self.pushButton_help.clicked.connect(self.pushButton_help.click) # type: ignore
-        self.pushButton_about.clicked.connect(self.pushButton_about.click) # type: ignore
+        self.pushButton_snap.clicked.connect(self.pushButton_snap.click)
+        self.pushButton_save.clicked.connect(self.pushButton_save.click)
+        self.pushButton_help.clicked.connect(self.help_form) # runs help module
+        self.pushButton_about.clicked.connect(self.pushButton_about.click)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -175,8 +175,12 @@ class Ui_MainWindow(object):
         self.pushButton_save.setAccessibleName(_translate("MainWindow", "save"))
         self.pushButton_save.setAccessibleDescription(_translate("MainWindow", "save"))
 
+    def help_form(self) :
+        from help import Ui_Form
+        
 app = QtWidgets.QApplication(sys.argv)
 MainWindow = QtWidgets.QMainWindow()
+Form = QtWidgets.QWidget()
 ui = Ui_MainWindow()
 ui.setupUi(MainWindow)
 MainWindow.show()
