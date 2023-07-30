@@ -1,4 +1,5 @@
 import pickle
+
 class Save :
     """For saving data"""
     def serialization(path, object) :

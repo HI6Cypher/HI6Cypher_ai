@@ -1,6 +1,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-import sys
 import os
+import sys
 import json
 from serialized_savor import Save
 

@@ -1,0 +1,45 @@
+{
+    "news_keywords" : ["NEWS", "News", "news",
+                    "NEWSLETTER", "NewsLetter",
+                    "Newsletter", "newsletter",
+                    "newsLetter"],
+
+    "cryptocurrency_keywords" : ["CRYPTO", "Crypto", "crypto",
+                            "CURRENCY", "Currency", "currency",
+                            "CRYPTOCURRENCY", "CryptoCurrency",
+                            "Cryptocurrency", "cryptoCurrency",
+                            "cryptocurrency"],
+
+    "translate_keywords" : ["TRANSLATE", "Translate",
+                        "translate", "TRANSLATION",
+                        "Translation", "translation",
+                        "MEAN", "Mean", "mean",
+                        "MEANING", "Meaning",
+                        "meaning"],
+
+    "weather_keywords" : ["WEATHER", "Weather",
+                        "weather", "AIR", "Air",
+                        "air", "METEOROLOGY",
+                        "Meteorology", "meteorology",
+                        "CLIMATE", "Climate", "climate",
+                        "TEMPERATURE", "Temperature",
+                        "temperature", "HUMIDITY",
+                        "Humidity", "humidity"],
+
+    "datetime_keywords" : ["DAY", "Day", "day",
+                        "MONTH", "Month", "month",
+                        "YEAR", "Year", "year",
+                        "TIME", "Time", "time",
+                        "DATE", "Date", "date"],
+
+    "ipinfo_keywords" : ["IP", "Ip", "ip",
+                "CHECK", "Check", "check",
+                "CHECKIP", "CHECKIp", "CHECKip",
+                "CheckIP", "CheckIp", "Checkip",
+                "checkIP", "checkIp", "checkip"],
+
+    "movieinfo_keywords" : ["MOVIE", "Movie", "movie",
+                        "MOVIES", "Movies", "movies",
+                        "FILM", "Film", "film",
+                        "FILMS", "Films", "film"]
+}

@@ -1,8 +1,9 @@
 from HI6 import GetPayload
 from DataClass import DataClass
+
 def DataProcessing_news(keywords) :
     proxy_count = 1
-    for proxy in DataClass.proxies :
+    for proxy in DataClass.proxies() :
         payload = {"keywords" : keywords,
                     "language" : "en",
                     "apiKey" : "asbBfb6qBcdJwSjEvfO35Tdb9SVJVvq5kSud4gWjPw8caKHV"}

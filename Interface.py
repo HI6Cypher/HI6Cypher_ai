@@ -1,5 +1,6 @@
-from DataClass import DataClass
 from DataProcessing import *
+from DataClass import DataClass
+
 def Interface_news(keywords) :
     try :
         info = DataProcessing_news(keywords)
@@ -81,7 +82,7 @@ def Interface_passwordgenerator(length) :
 def Interface_translate(fromLan, toLan, text) :
     try :
             if text :
-                lans = DataClass.languages
+                lans = DataClass.languages()
                 for i in lans :
                     if fromLan.title() == i["name"] :
                         codename_1 = i["code"]
@@ -108,7 +109,7 @@ def Interface_translate(fromLan, toLan, text) :
 def Interface_weather(lat = None, lon = None, timezone = "UTC") :
     try :
         if lat and lon and timezone :
-            if timezone.title() in DataClass.timezones :
+            if timezone.title() in DataClass.timezones() :
                 return DataProcessing_weather(lat, lon, timezone)
             else :
                 return DataProcessing_weather(lat, lon, timezone = "UTC")
