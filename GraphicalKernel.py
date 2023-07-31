@@ -1,7 +1,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-import os
-import sys
 import json
+import os
+import random
+import sys
+import time
+from output import OutPut
 from serialized_savor import Save
 
 class Ui_MainWindow(object):
@@ -34,7 +37,7 @@ class Ui_MainWindow(object):
         MainWindow.setContextMenuPolicy(QtCore.Qt.ActionsContextMenu)
         MainWindow.setWindowTitle("HI6Cypher")
         icon = QtGui.QIcon()
-        path = f"{os.getcwd()}/icons/main.png"
+        path = f"{os.getcwd()}/icons/main.png" #path of main.png icon
         icon.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setToolTipDuration(-1)
@@ -61,7 +64,7 @@ class Ui_MainWindow(object):
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Text, brush)
         self.textBrowser_main.setPalette(palette)
         font = QtGui.QFont()
-        font.setFamily("Consolas")
+        font.setFamily("Consolas") # Consolas, best font around the world
         font.setPointSize(10)
         self.textBrowser_main.setFont(font)
         self.textBrowser_main.setToolTip("")
@@ -72,8 +75,6 @@ class Ui_MainWindow(object):
         self.lineEdit_write = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit_write.setEnabled(True)
         self.lineEdit_write.setGeometry(QtCore.QRect(160, 640, 841, 40))
-        font = QtGui.QFont()
-        font.setFamily("Consolas")
         font.setPointSize(10)
         font.setBold(True)
         font.setWeight(75)
@@ -95,7 +96,7 @@ class Ui_MainWindow(object):
         self.pushButton_snap.setAutoFillBackground(False)
         self.pushButton_snap.setText("")
         icon1 = QtGui.QIcon()
-        path = f"{os.getcwd()}/icons/snap.png"
+        path = f"{os.getcwd()}/icons/snap.png" # path of snap.png icon
         icon1.addPixmap(QtGui.QPixmap(path), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_snap.setIcon(icon1)
         self.pushButton_snap.setIconSize(QtCore.QSize(32, 32))
@@ -107,27 +108,34 @@ class Ui_MainWindow(object):
         self.textBrowser.setGeometry(QtCore.QRect(10, 40, 141, 641))
         self.textBrowser.setObjectName("textBrowser")
         self.comboBox = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox.setGeometry(QtCore.QRect(10, 12.5, 67, 20))
+        self.comboBox.setGeometry(QtCore.QRect(10, 12.5, 55, 21))
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.pushButton_save = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_save.setGeometry(QtCore.QRect(90, 11, 62, 23))
-        self.pushButton_save.setToolTip("")
+        self.pushButton_save.setGeometry(QtCore.QRect(110, 11, 40, 23))
+        self.pushButton_save.setToolTip("Save history")
         self.pushButton_save.setToolTipDuration(-1)
         self.pushButton_save.setIconSize(QtCore.QSize(32, 32))
         self.pushButton_save.setObjectName("pushButton_save")
+        self.pushButton_del = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_del.setGeometry(QtCore.QRect(68, 11, 40, 23))
+        self.pushButton_del.setToolTip("Delete history")
+        self.pushButton_del.setToolTipDuration(-1)
+        self.pushButton_del.setIconSize(QtCore.QSize(32, 32))
+        self.pushButton_del.setObjectName("pushButton_save")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
         self.retranslateUi(MainWindow)
-        self.pushButton_snap.clicked.connect(self.Main)
-        self.pushButton_save.clicked.connect(self.Save)
+        self.pushButton_snap.clicked.connect(self.Main) # to run Main function
+        self.pushButton_save.clicked.connect(self.Save) # to run Save function
+        self.pushButton_del.clicked.connect(self.Delete) # to run Delete function
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.lineEdit_write.returnPressed.connect(self.pushButton_snap.click) # to click snap Button when user press Enter
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -142,13 +150,19 @@ class Ui_MainWindow(object):
         self.comboBox.setItemText(1, _translate("MainWindow", "Capabilities"))
         self.comboBox.setItemText(2, _translate("MainWindow", "Orders"))
         self.comboBox.setItemText(3, _translate("MainWindow", "Other"))
-        self.pushButton_save.setAccessibleName(_translate("MainWindow", "save"))
-        self.pushButton_save.setAccessibleDescription(_translate("MainWindow", "save"))
         self.pushButton_save.setText(_translate("MainWindow", "Save"))
+        self.pushButton_del.setText(_translate("MainWindow", "Delete"))
         self.sethtml()
         self.comboBox.currentIndexChanged.connect(self.IndexDecision)
-        path = f"{os.getcwd()}/doc/saves.p"
+        path = f"{os.getcwd()}/doc/saves.p" # path of saves.p file to restoring history
         self.textBrowser_main.append(Save.deserialization(path))
+        app.processEvents()
+        if self.textBrowser_main.toPlainText() == "" :
+            with open("doc/greeting_keywords.json", "r") as file : # to show hi greeting while starting program
+                message = json.load(file)
+            ran = random.randint(0, len(message["hi"]) - 1)
+            greet = "$ HI6Cypher ->\n\n%s" % (message["hi"][ran])
+            self.textBrowser_main.append(greet)
 
     def sethtml(self) :
         _translate = QtCore.QCoreApplication.translate
@@ -172,10 +186,27 @@ class Ui_MainWindow(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">GitHub:</span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">https://github.com/HI6Cypher/HI6Cypher</span></p></body></html>"))
 
-    def Main(self) : #TODO
-        pass
+    def Main(self) : # to call Output function to connect DataProcessing Kernel
+        request_text = self.lineEdit_write.text()
+        thinking_text = "\nThinking..."
+        HI6Cypher_res = "\n$ HI6Cypher ->\n\n"
+        user_req = "User:\n"
+        request = f"{user_req}{self.lineEdit_write.text()}"
+        if self.lineEdit_write.text() :
+            self.lineEdit_write.clear()
+            app.processEvents()
+            self.textBrowser_main.append(request)
+            self.lineEdit_write.setText(thinking_text)
+            app.processEvents()
+            time.sleep(0.5) # to sleep 0.5 second
+            response = f"{HI6Cypher_res}{OutPut(request_text)}"
+            self.lineEdit_write.clear()
+            app.processEvents()
+            self.textBrowser_main.append(response)
+        else :
+            pass
 
-    def IndexDecision(self) :
+    def IndexDecision(self) : # to show indexes in comboBox
         path = f"{os.getcwd()}/doc/help(unreadble).json"
         with open(path, "r") as file :
             data = json.load(file)
@@ -190,10 +221,21 @@ class Ui_MainWindow(object):
         elif self.comboBox.currentText() == "Other" :
             self.textBrowser.clear()
             self.textBrowser.append(data["Other"])
-    def Save(self) :
-        self.textBrowser_main.append("hello world")
-        path = f"{os.getcwd()}/doc/saves.p"
-        Save.serialization(path, self.textBrowser_main.toPlainText())
+
+    def Save(self) : # to save history
+        path = f"{os.getcwd()}/doc/saves.p" # path of saves.p file
+        try :
+            Save.serialization(path, self.textBrowser_main.toPlainText())
+        except :
+            pass
+
+    def Delete(self) : # to delete history
+        path = f"{os.getcwd()}/doc/saves.p" # path of saves.p file
+        self.textBrowser_main.clear()
+        try :
+            os.remove(path)
+        except :
+            pass
 
 app = QtWidgets.QApplication(sys.argv)
 MainWindow = QtWidgets.QMainWindow()
