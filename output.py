@@ -1,18 +1,9 @@
-"""takes one entrance and give one output"""
 import re
 from Interface import *
 from DataClass import DataClass
 
-def OutPut(entrance) : #TODO add other functions
-    # myipinfo, 
-    # passwordgenerator, uselessfacts, quotes, 
-    # catfacts, events, dictionary
-    """
-    -we have Keywords in DataClass to match them\n
-    -we have mainKeyword for figuring out what we should call\n
-    -we have a lot of if statement to match mainKeyword to Keyword in DataClass\n
-    -we have functions that related to Interface functions\n
-    """
+def OutPut(entrance) :
+    """### takes one entrance and give one output"""
     error = f"What?!\nI didn't understand [{entrance}]\nCheck orders"
     try :
         entrance = re.sub(r'"', "'", entrance) #for change double quotion to single quotion
@@ -66,6 +57,52 @@ def OutPut(entrance) : #TODO add other functions
         # if moviename has one word, using quotion is optional but
         # if moviename has more than one word, using quotion is mandatory
 
+    def myipinfo() :
+        """This function related to Interface_myipinfo()\n
+        checks if keyword is exist to return Interface_myipinfo() or not"""
+        return Interface_myipinfo()
+
+    def passwordgenerator() :
+        """This function related to Interface_passwordgenerator()\n
+        checks if keyword is exist to return Interface_passwordgenerator() or not"""
+        try :
+            length = re.search(r"\d.", entrance).group()
+        except :
+            return error + "\nYou should specify length of password"
+        return Interface_passwordgenerator(length)
+
+    def uselessfacts() :
+        """This function related to Interface_uselessfacts()\n
+        checks if keyword is exist to return Interface_uselessfacts() or not"""
+        return Interface_uselessfacts()
+
+    def quotes() :
+        """This function related to Interface_quotes()\n
+        checks if keyword is exist to return Interface_quotes() or not"""
+        return Interface_quotes()
+
+    def catfacts() :
+        """This function related to Interface_catfacts()\n
+        checks if keyword is exist to return Interface_catfacts() or not"""
+        return Interface_catfacts()
+
+    def events() :
+        """This function related to Interface_events()\n
+        checks if keyword is exist to return Interface_events() or not"""
+        try :
+            day = re.search(r"(?<=/).+(?=$)", entrance).group()
+            month = re.search(r"(?<=\s).+(?=/)", entrance).group()
+        except :
+            return error
+        return Interface_events(month, day)
+
+    def dictionary() :
+        try :
+            keyword = re.search(r"\S+$", entrance).group()
+        except :
+            return error
+        return Interface_dictionary(keyword)
+
     def translate() :
         """This function related to Interface_translate()\n
         checks if fromLan, toLan and text keywords are exist to return Interface_translate() or not"""
@@ -112,6 +149,22 @@ def OutPut(entrance) : #TODO add other functions
         return ipinfo()
     elif mainKeyword in DataClass.keywords("movieinfo_keywords") :
         return movieinfo()
+    elif entrance in DataClass.keywords("myipinfo_keywords") :
+        return myipinfo()
+    elif mainKeyword in DataClass.keywords("myipinfo_keywords") :
+        return myipinfo()
+    elif mainKeyword in DataClass.keywords("passwordgenerator_keywords") :
+        return passwordgenerator()
+    elif mainKeyword in DataClass.keywords("uselessfacts_keywords") :
+        return uselessfacts()
+    elif mainKeyword in DataClass.keywords("quotes_keywords") :
+        return quotes()
+    elif mainKeyword in DataClass.keywords("catfacts_keywords") :
+        return catfacts()
+    elif mainKeyword in DataClass.keywords("events_keywords") :
+        return events()
+    elif mainKeyword in DataClass.keywords("dictionary_keywords") :
+        return dictionary()
     else :
         return error
     # if statements to checking mainKeywords in DataClass

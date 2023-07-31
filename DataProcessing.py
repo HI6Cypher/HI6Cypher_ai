@@ -314,9 +314,9 @@ def DataProcessing_quotes() :
 
 def DataProcessing_catfacts() :
     proxy_count = 0
-    for proxy in DataClass.proxies :
+    for proxy in DataClass.proxies() :
         url = "https://meowfacts.herokuapp.com"
-        download = GetPayload(url = url, mode = "json", proxies = proxy, timeout = 1)
+        download = GetPayload(url = url, mode = "json", proxies = proxy, timeout = 5)
         data = download.get_data()
         if data == 503 :
             proxy_count += 1
