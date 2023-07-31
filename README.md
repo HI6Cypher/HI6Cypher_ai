@@ -5,8 +5,9 @@ HI6Cypher is an intelligent virtual assistant designed to provide you with inter
 ## Installation
 
 You can use HI6Cypher in two way:
-First, run GraphicalKernel.py, you should use Python 3.6 or higher (source code/GraphicalKernel.py)
-HI6Cypher uses PyQt5 to be Graphical so:
+
+First, run GraphicalKernel.py, you should use [Python](https://www.python.org/downloads) 3.6 or higher (source code/GraphicalKernel.py)
+HI6Cypher uses [PyQt5](www.riverbankcomputing.com) to be Graphical so:
 ```bash
 pip install PyQt5
 ```
@@ -22,4 +23,4 @@ Fast: HI6Cypher, is Pythonic and optimized to work fast. it isn't like bash, com
 
 ## Contributing
 
-Pull requests are welcome. send suggestions to [Email](huaweisclu31@hotmail.com)
+Pull requests are welcome. send suggestions to (huaweisclu31@hotmail.com)
