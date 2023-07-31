@@ -1,0 +1,74 @@
+{
+    "news_keywords" : ["NEWS", "News", "news",
+                    "NEWSLETTER", "NewsLetter",
+                    "Newsletter", "newsletter",
+                    "newsLetter"],
+
+    "cryptocurrency_keywords" : ["CRYPTO", "Crypto", "crypto",
+                            "CURRENCY", "Currency", "currency",
+                            "CRYPTOCURRENCY", "CryptoCurrency",
+                            "Cryptocurrency", "cryptoCurrency",
+                            "cryptocurrency"],
+
+    "datetime_keywords" : ["DAY", "Day", "day",
+                        "MONTH", "Month", "month",
+                        "YEAR", "Year", "year",
+                        "TIME", "Time", "time",
+                        "DATE", "Date", "date"],
+
+    "ipinfo_keywords" : ["IP", "Ip", "ip",
+                    "CHECK", "Check", "check",
+                    "CHECKIP", "CHECKIp", "CHECKip",
+                    "CheckIP", "CheckIp", "Checkip",
+                    "checkIP", "checkIp", "checkip"],
+
+    "movieinfo_keywords" : ["MOVIE", "Movie", "movie",
+                        "MOVIES", "Movies", "movies",
+                        "FILM", "Film", "film",
+                        "FILMS", "Films", "film"],
+
+    "myipinfo_keywords" : ["My ip", "my ip"],
+
+    "passwordgenerator_keywords" : ["PASSWORD", "PASSWORDS",
+                                "Password", "Passwords",
+                                "password", "passwords"],
+
+    "uselessfacts_keywords" : ["FACT", "FACTS", "USELESSFACT",
+                            "USELESSFACTS", "Fact", "Facts",
+                            "Uselessfact", "Uselessfacts",
+                            "fact", "facts", "uselessfact",
+                            "uselessfacts"],
+
+    "quotes_keywords" : ["QUOTE", "QUOTES", "Quote", "Quotes",
+                    "quote", "quotes"],
+
+    "translate_keywords" : ["TRANSLATE", "Translate",
+                        "translate", "TRANSLATION",
+                        "Translation", "translation",
+                        "MEAN", "Mean", "mean",
+                        "MEANING", "Meaning",
+                        "meaning"],
+
+    "catfacts_keywords" : ["CATFACT", "CATSFACT", "CATFACTS", "CATSFACTS",
+                        "Catfact", "Catsfact", "Catfacts", "Catsfacts",
+                        "catfact", "catsfact", "catfacts", "catsfacts"],
+
+    "events_keywords" : ["EVENT", "EVENTS",
+                    "Event", "Events",
+                    "event", "events"],
+
+    "dictionary_keywords" : ["DEFINE", "DEFINITION", "DICT",
+                        "DICTIONARY", "Define", "Definition",
+                        "Dict", "Dictionary", "define", "definition",
+                        "dict", "dictionary"],
+
+    "weather_keywords" : ["WEATHER", "Weather",
+                    "weather", "AIR", "Air",
+                    "air", "METEOROLOGY",
+                    "Meteorology", "meteorology",
+                    "CLIMATE", "Climate", "climate",
+                    "TEMPERATURE", "Temperature",
+                    "temperature", "HUMIDITY",
+                    "Humidity", "humidity"]
+    
+}

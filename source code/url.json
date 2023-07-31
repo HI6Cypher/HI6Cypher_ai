@@ -1,0 +1,16 @@
+{
+    "api_url_0" : "https://api.codebazan.ir/translate/?type:&from:&to:&text:",
+    "api_url_1" : "http://api.codebazan.ir/time-date/?json:all",
+    "api_url_2" : "http://ip-api.com/json/127.0.0.1",
+    "api_url_3" : "https://get.geojs.io/v1/ip/geo.json",
+    "api_url_4" : "https://api.sunrisesunset.io/json?lat:&lng:&timezone:",
+    "api_url_5" : "http://api.codebazan.ir/password/?length:",
+    "api_url_6" : "http://www.omdbapi.com/?t:&apikey:4cb67dde",
+    "api_url_7" : "https://api.coinlore.net/api/tickers/",
+    "api_url_8" : "https://api.openweathermap.org/data/2.5/weather?lat:&lon:&appid:d7ac3233b2d88a4c8f01032c02eae2db",
+    "api_url_9" : "https://api.currentsapi.services/v1/search?keywords:&language:&apiKey:asbBfb6qBcdJwSjEvfO35Tdb9SVJVvq5kSud4gWjPw8caKHV",
+    "api_url_10" : "https://uselessfacts.jsph.pl/api/v2/facts/random",
+    "api_url_11" : "http://api.forismatic.com/api/1.0/?method:getQuote&format:json&key:1&lang:en",
+    "api_url_12" : "https://byabbe.se/on-this-day/month/day/events.json",
+    "api_url_13" : "https://api.dictionaryapi.dev/api/v2/entries/en/word"
+}
